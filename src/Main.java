@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     // uses dataManagement class with startup method to create new folder if one is necessary
-    int startup = (dataManagement.startup("H:\\robotTracker"));
+    int startup = (dataManagement.createFolder("H:","robotTracker"));
     switch(startup) {
         case -1:
             System.out.println("Error");
