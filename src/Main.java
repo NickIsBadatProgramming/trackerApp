@@ -17,11 +17,14 @@ public class Main {
             System.out.println("Data folder located");
             break;
     }
-        //NewRobot R1 = new NewRobot(5442,"Mechanical Monarchy",2,4,3,"Is the best",12,6,1,2); //example construction of new robot
-        //R1.compileData(root); //example compilation of robot data
+        NewRobot R1 = new NewRobot(5442,"Mechanical Monarchy",2,4,3,"Is the best",12,6,1,2); //example construction of new robot
+        R1.compileData(root); //example compilation of robot data
 
-
-
+        try {
+            System.out.println(dataManagement.getClimbingPoints(root,5442));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
