@@ -167,9 +167,9 @@ public class NewRobot {
             dataManagement.writeToFile(root + this.teamNumber, "scaleAutonomous.txt",Integer.toString(this.scaleAutonomous));
             dataManagement.createFile(root + this.teamNumber, "comments.txt");
             dataManagement.writeToFile(root + this.teamNumber, "comments.txt",this.comments);
-            dataManagement.createFile(root + this.teamNumber, "shootingPoints");
+            dataManagement.createFile(root + this.teamNumber, "shootingPoints.txt");
             dataManagement.writeToFile(root + this.teamNumber, "shootingPoints.txt",Double.toString(shootingPoints));
-            dataManagement.createFile(root + this.teamNumber, "climbingPoints");
+            dataManagement.createFile(root + this.teamNumber, "climbingPoints.txt");
             dataManagement.writeToFile(root + this.teamNumber, "climbingPoints.txt",Double.toString(climbingPoints));
             dataManagement.createFile(root + this.teamNumber, "wins.txt");
             dataManagement.writeToFile(root + this.teamNumber, "wins.txt",Integer.toString(this.wins));
