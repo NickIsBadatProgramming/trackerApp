@@ -135,7 +135,7 @@ public class dataManagement {
     /*----------------------getters for file information using robot number----------------------*/
     // use these to grab info about a robot
 
-    public static String getRobotComment(String root, int teamNumber) throws Exception {
+    public static String getComments(String root, int teamNumber) throws Exception {
         if(!checkForSlash(root)) {
             root += "/";
         }
