@@ -14,6 +14,18 @@ public class Main {
             System.out.println("Data folder located");
             break;
     }
+   // int txtFileCreation = dataManagement.createTXT("H:/robotTracker","data.txt" );
+   // switch(txtFileCreation) {
+  //      case -1:
+  //          System.out.println("error");
+  //          break;
+  //      case 1:
+  //          System.out.println("file created");
+  //          break;
+  //      case 2:
+  //          System.out.println("file found");
+  //          break;
+  //  }
 
 
 

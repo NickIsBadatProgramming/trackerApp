@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 
 public class dataManagement {
@@ -5,8 +7,7 @@ public class dataManagement {
         //creates new file
 
         if(folderLocation != null && folderName != null) {
-            String lastChar = folderName.substring(folderName.length() - 1);
-            if(lastChar == "/" || lastChar == "\\") {
+            if(checkForSlash(folderLocation)) {
                 File f1 = new File(folderLocation + folderName);
                 boolean testForFolder = f1.mkdirs();
                 if (testForFolder) {
@@ -34,6 +35,35 @@ public class dataManagement {
 
 
         return -1;
+    }
+    //public static int createTXT(String fileLocation, String fileName) {
+       // if (!checkForSlash(fileLocation)) {
+           // fileLocation += "/";
+       // }
+        //try {
+       //     File txtFile = new File(fileLocation + fileName);
+       //     if (txtFile.createNewFile()) {
+      //          return 1;
+      //      } else if (txtFile.exists()) {
+             //   return 2;
+      //      }
+     //   }
+     //   catch (IOException e) {
+     //       e.printStackTrace();
+     //       return -1;
+     //   }
+
+
+    //    return -1;
+   // }
+
+
+    public static boolean checkForSlash(@NotNull String input) {
+        String lastChar = input.substring(input.length() - 1);
+        if(lastChar == "/" || lastChar == "\\") {
+            return true;
+        }
+        return false;
     }
 }
 
