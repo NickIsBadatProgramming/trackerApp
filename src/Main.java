@@ -1,9 +1,6 @@
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
     // uses dataManagement class with startup method to create new folder if one is necessary
     int startup = (dataManagement.createFolder("H:","robotTracker"));
     switch(startup) {
@@ -24,6 +21,5 @@ public class Main {
 
 
 
-    scanner.close();
     }
 }
