@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -105,7 +103,7 @@ public class dataManagement {
 
 
     //checks for the "/" at the end of a string, used for file locations
-    public static boolean checkForSlash(@NotNull String input) {
+    public static boolean checkForSlash(String input) {
         String lastChar = input.substring(input.length() - 1);
         if(lastChar == "/" || lastChar == "\\") {
             return true;
@@ -132,10 +130,10 @@ public class dataManagement {
 
     }
 
-    /*----------------------getters for file information using robot number----------------------*/
+    /*----------------------old getters for file information using robot number----------------------*/
     // use these to grab info about a robot
 
-    public static String getComments(String root, int teamNumber) throws Exception {
+   /* public static String getComments(String root, int teamNumber) throws Exception {
         if(!checkForSlash(root)) {
             root += "/";
         }
@@ -309,6 +307,22 @@ public class dataManagement {
         }
         return -1;
     }
+*/
 
+    /* ------------------- new getters --------------------- */
+    public static String getData(int locationNum, String root, int teamNumber) throws Exception {
+        if (!checkForSlash(root)) {
+            root += "/";
+        }
+        Scanner reader = new Scanner(new File(root + teamNumber + ".csv"));
+        reader.useDelimiter(",");
+        int x = 0;
+        String out = null;
+        while (x <= locationNum) {
+            out = reader.next();
+            x += 1;
+        }
+        return out;
+    }
 }
 

@@ -1,7 +1,7 @@
 
 public class NewRobot {
     private String teamName;
-    // number is used to reference all robot data
+    // teamNumber is used to reference all robot data
     private int teamNumber;
     private int scaleClimbing;
     private int scaleShooting;
@@ -13,6 +13,8 @@ public class NewRobot {
     private double totalPoints;
     private int wins;
     private int losses;
+    private String extras;
+
 
     /*---------------------- getters and setters---------------------- */
 
@@ -103,6 +105,16 @@ public class NewRobot {
     public void setLosses(int losses) {
         this.losses = losses;
     }
+    public String getExtras() {
+        return extras;
+    }
+
+    public void setExtras(String extras) {
+        this.extras = extras;
+    }
+    public void addExtras(String extras) {
+        this.extras += "," + extras;
+    }
     /*----------------------Constructors----------------------*/
 
     public NewRobot(int teamNumber,String teamName, int scaleClimbing, int scaleShooting, int scaleAutonomous, String comments, double climbingPoints, double shootingPoints, int wins, int losses) {
@@ -121,13 +133,13 @@ public class NewRobot {
     }
 
     public NewRobot() {
-        this(-1,"untitled",0,0,0,"none",0,0,0,0);
+        this(0,null,0,0,0,null,0,0,0,0);
     }
     public NewRobot(int teamNumber) {
-        this(teamNumber, "untitled" , 0,0,0,"none",0,0,0,0);
+        this(teamNumber, null , 0,0,0,null,0,0,0,0);
     }
     public NewRobot(int teamNumber, String teamName) {
-        this(teamNumber, teamName, 0, 0, 0,"none",0,0,0,0);
+        this(teamNumber, teamName, 0, 0, 0,null,0,0,0,0);
     }
     public NewRobot(int teamNumber, String teamName, String comments) {
         this(teamNumber, teamName, 0, 0, 0, comments,0,0,0,0);
@@ -156,16 +168,16 @@ public class NewRobot {
             root += "/";
         }
         try {
-            dataManagement.createFolder(root, Integer.toString(this.teamNumber));
-            dataManagement.createFile(root + this.teamNumber, "teamName.txt");
-            dataManagement.writeToFile(root + this.teamNumber, "teamName.txt",this.teamName);
-            dataManagement.createFile(root + this.teamNumber, "scaleClimbing.txt");
-            dataManagement.writeToFile(root + this.teamNumber, "scaleClimbing.txt",Integer.toString(this.scaleClimbing));
-            dataManagement.createFile(root + this.teamNumber, "scaleShooting.txt");
-            dataManagement.writeToFile(root + this.teamNumber, "scaleShooting.txt",Integer.toString(this.scaleShooting));
-            dataManagement.createFile(root + this.teamNumber, "scaleAutonomous.txt");
-            dataManagement.writeToFile(root + this.teamNumber, "scaleAutonomous.txt",Integer.toString(this.scaleAutonomous));
-            dataManagement.createFile(root + this.teamNumber, "comments.txt");
+            //dataManagement.createFolder(root, Integer.toString(this.teamNumber));
+            //dataManagement.createFile(root + this.teamNumber, "teamName.txt");
+            //dataManagement.writeToFile(root + this.teamNumber, "teamName.txt",this.teamName);
+           // dataManagement.createFile(root + this.teamNumber, "scaleClimbing.txt");
+           // dataManagement.writeToFile(root + this.teamNumber, "scaleClimbing.txt",Integer.toString(this.scaleClimbing));
+           // dataManagement.createFile(root + this.teamNumber, "scaleShooting.txt");
+           // dataManagement.writeToFile(root + this.teamNumber, "scaleShooting.txt",Integer.toString(this.scaleShooting));
+           // dataManagement.createFile(root + this.teamNumber, "scaleAutonomous.txt");
+           // dataManagement.writeToFile(root + this.teamNumber, "scaleAutonomous.txt",Integer.toString(this.scaleAutonomous));
+           /* dataManagement.createFile(root + this.teamNumber, "comments.txt");
             dataManagement.writeToFile(root + this.teamNumber, "comments.txt",this.comments);
             dataManagement.createFile(root + this.teamNumber, "shootingPoints.txt");
             dataManagement.writeToFile(root + this.teamNumber, "shootingPoints.txt",Double.toString(shootingPoints));
@@ -176,6 +188,16 @@ public class NewRobot {
             dataManagement.createFile(root + this.teamNumber, "losses.txt");
             dataManagement.writeToFile(root + this.teamNumber, "losses.txt",Integer.toString(this.losses));
             this.isCompiled = true;
+
+            */
+
+            dataManagement.createFile(root, this.teamNumber + ".csv");
+            if(extras != null) {
+                dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + Integer.toString(this.scaleClimbing) + "," + Integer.toString(this.scaleShooting) + "," + Integer.toString(this.scaleAutonomous) + "," + this.comments + "," + Double.toString(this.shootingPoints) + "," + Double.toString(this.climbingPoints) + "," + Integer.toString(this.wins) + "," + Integer.toString(this.losses) + "," + extras );
+            } else {
+                dataManagement.writeToFile(root , this.teamNumber + "data.csv", this.teamName + "," + Integer.toString(this.scaleClimbing) + "," + Integer.toString(this.scaleShooting) + "," + Integer.toString(this.scaleAutonomous) + "," + this.comments + "," + Double.toString(this.shootingPoints) + "," + Double.toString(this.climbingPoints) + "," + Integer.toString(this.wins) + "," + Integer.toString(this.losses));
+            }
+
         }
         catch(Exception e) {
             e.printStackTrace();
