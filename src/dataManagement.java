@@ -58,6 +58,7 @@ public class dataManagement {
                     return -1;
                 }
             } else {
+                folderLocation += "/";
                 File f1 = new File(folderLocation);
                 boolean testForFolder = f1.mkdirs();
                 if (testForFolder) {
