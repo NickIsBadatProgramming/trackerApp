@@ -10,6 +10,7 @@ public class NewRobot {
     private boolean isCompiled;
     private double shootingPoints;
     private double climbingPoints;
+    private double autonomousPoints;
     private double totalPoints;
     private int wins;
     private int losses;
@@ -115,9 +116,16 @@ public class NewRobot {
     public void addExtras(String extras) {
         this.extras += "," + extras;
     }
+    public double getAutonomousPoints() {
+        return autonomousPoints;
+    }
+
+    public void setAutonomousPoints(double autonomousPoints) {
+        this.autonomousPoints = autonomousPoints;
+    }
     /*----------------------Constructors----------------------*/
 
-    public NewRobot(int teamNumber,String teamName, int scaleClimbing, int scaleShooting, int scaleAutonomous, String comments, double climbingPoints, double shootingPoints, int wins, int losses) {
+    public NewRobot(int teamNumber,String teamName, int scaleClimbing, int scaleShooting, int scaleAutonomous, String comments, double climbingPoints, double shootingPoints, double autonomousPoints, int wins, int losses) {
         this.teamName = teamName;
         this.teamNumber = teamNumber;
         this.scaleClimbing = scaleClimbing;
@@ -127,22 +135,23 @@ public class NewRobot {
         this.isCompiled = false;
         this.climbingPoints = climbingPoints;
         this.shootingPoints = shootingPoints;
+        this.autonomousPoints = autonomousPoints;
         this.totalPoints = climbingPoints + shootingPoints;
         this.wins = wins;
         this.losses = losses;
     }
 
     public NewRobot() {
-        this(0,null,0,0,0,null,0,0,0,0);
+        this(0,null,0,0,0,null,0,0,0,0,0);
     }
     public NewRobot(int teamNumber) {
-        this(teamNumber, null , 0,0,0,null,0,0,0,0);
+        this(teamNumber, null , 0,0,0,null,0,0,0,0,0);
     }
     public NewRobot(int teamNumber, String teamName) {
-        this(teamNumber, teamName, 0, 0, 0,null,0,0,0,0);
+        this(teamNumber, teamName, 0, 0, 0,null,0,0,0,0,0);
     }
     public NewRobot(int teamNumber, String teamName, String comments) {
-        this(teamNumber, teamName, 0, 0, 0, comments,0,0,0,0);
+        this(teamNumber, teamName, 0, 0, 0, comments,0,0,0,0,0);
     }
 
     public void addWinsAndLosses(int wins, int losses) {
@@ -193,9 +202,9 @@ public class NewRobot {
 
             dataManagement.createFile(root, this.teamNumber + ".csv");
             if(extras != null) {
-                dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + Integer.toString(this.scaleClimbing) + "," + Integer.toString(this.scaleShooting) + "," + Integer.toString(this.scaleAutonomous) + "," + this.comments + "," + Double.toString(this.shootingPoints) + "," + Double.toString(this.climbingPoints) + "," + Integer.toString(this.wins) + "," + Integer.toString(this.losses) + "," + extras );
+                dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + Integer.toString(this.scaleClimbing) + "," + Integer.toString(this.scaleShooting) + "," + Integer.toString(this.scaleAutonomous) + "," + this.comments + "," + Double.toString(this.shootingPoints) + "," + Double.toString(this.climbingPoints) + "," + Double.toString(this.autonomousPoints) + "," + Integer.toString(this.wins) + "," + Integer.toString(this.losses) + "," + extras );
             } else {
-                dataManagement.writeToFile(root , this.teamNumber + "data.csv", this.teamName + "," + Integer.toString(this.scaleClimbing) + "," + Integer.toString(this.scaleShooting) + "," + Integer.toString(this.scaleAutonomous) + "," + this.comments + "," + Double.toString(this.shootingPoints) + "," + Double.toString(this.climbingPoints) + "," + Integer.toString(this.wins) + "," + Integer.toString(this.losses));
+                dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + Integer.toString(this.scaleClimbing) + "," + Integer.toString(this.scaleShooting) + "," + Integer.toString(this.scaleAutonomous) + "," + this.comments + "," + Double.toString(this.shootingPoints) + "," + Double.toString(this.climbingPoints) + "," + Double.toString(this.autonomousPoints) + "," + Integer.toString(this.wins) + "," + Integer.toString(this.losses));
             }
 
         }
