@@ -7,7 +7,6 @@ public class NewRobot {
     private int scaleShooting;
     private int scaleAutonomous;
     private String comments;
-    private boolean isCompiled;
     private double shootingPoints;
     private double climbingPoints;
     private double autonomousPoints;
@@ -132,7 +131,6 @@ public class NewRobot {
         this.scaleShooting = scaleShooting;
         this.scaleAutonomous = scaleAutonomous;
         this.comments = comments;
-        this.isCompiled = false;
         this.climbingPoints = climbingPoints;
         this.shootingPoints = shootingPoints;
         this.autonomousPoints = autonomousPoints;
@@ -202,9 +200,9 @@ public class NewRobot {
 
             dataManagement.createFile(root, this.teamNumber + ".csv");
             if(extras != null) {
-                dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + Integer.toString(this.scaleClimbing) + "," + Integer.toString(this.scaleShooting) + "," + Integer.toString(this.scaleAutonomous) + "," + this.comments + "," + Double.toString(this.shootingPoints) + "," + Double.toString(this.climbingPoints) + "," + Double.toString(this.autonomousPoints) + "," + Integer.toString(this.wins) + "," + Integer.toString(this.losses) + "," + extras );
+                dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + this.scaleClimbing + "," + this.scaleShooting + "," + this.scaleAutonomous + "," + this.comments + "," + this.shootingPoints + "," + this.climbingPoints + "," + this.autonomousPoints + "," + this.wins + "," + this.losses + "," + extras );
             } else {
-                dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + Integer.toString(this.scaleClimbing) + "," + Integer.toString(this.scaleShooting) + "," + Integer.toString(this.scaleAutonomous) + "," + this.comments + "," + Double.toString(this.shootingPoints) + "," + Double.toString(this.climbingPoints) + "," + Double.toString(this.autonomousPoints) + "," + Integer.toString(this.wins) + "," + Integer.toString(this.losses));
+                dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + this.scaleClimbing + "," + this.scaleShooting + "," + this.scaleAutonomous + "," + this.comments + "," + this.shootingPoints + "," + this.climbingPoints + "," + this.autonomousPoints + "," + this.wins + "," + this.losses);
             }
 
         }

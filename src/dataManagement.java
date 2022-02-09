@@ -106,10 +106,7 @@ public class dataManagement {
     //checks for the "/" at the end of a string, used for file locations
     public static boolean checkForSlash(String input) {
         String lastChar = input.substring(input.length() - 1);
-        if(lastChar == "/" || lastChar == "\\") {
-            return true;
-        }
-        return false;
+        return lastChar.equals("/") || lastChar.equals("\\");
     }
 
 
