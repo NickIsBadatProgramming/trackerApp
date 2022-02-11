@@ -12,9 +12,14 @@ public class Main {
             case 2 -> System.out.println("Data folder located");
         }
 
-        //Gui george = new Gui();
-        popupInput bruh = new popupInput("Enter Team Number");
-        popupInput bruh2 = new popupInput("Enter Team Name");
+        Gui steve = new Gui();
+        steve.GUI();
+        while(true) {
+            if(steve.getIsRunning()) {
+                break;
+            }
+        }
+        System.out.println(steve.getTeamNameOutput());
 
 
 
@@ -25,5 +30,19 @@ public class Main {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+    }
+    public static void close() {
+        System.exit(0);
     }
 }

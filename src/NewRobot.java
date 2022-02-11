@@ -1,18 +1,18 @@
 
 public class NewRobot {
-    private String teamName;
+    private String teamName; //
     // teamNumber is used to reference all robot data
-    private int teamNumber;
+    private int teamNumber; //
     private int scaleClimbing;
     private int scaleShooting;
     private int scaleAutonomous;
     private String comments;
-    private double shootingPoints;
-    private double climbingPoints;
-    private double autonomousPoints;
+    private double shootingPoints; //
+    private double climbingPoints; //
+    private double autonomousPoints; //
     private double totalPoints;
-    private int wins;
-    private int losses;
+    private int wins; //
+    private int losses; //
     private String extras;
 
 
