@@ -2,42 +2,49 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Objects;
+
 public class Gui {
 private String teamNameOutput;
-private String teamNumberOutput;
-private String autonomousPointsOutput;
-private String climbingPointsOutput;
-private String shootingPointsOutput;
-private String winsOutput;
-private String lossesOutput;
+private int teamNumberOutput;
+private double autonomousPointsOutput;
+private double climbingPointsOutput;
+private double shootingPointsOutput;
+private int winsOutput;
+private int lossesOutput;
 private String commentsOutput;
 private boolean isRunning;
+
+    public Gui() {
+        this.isRunning = true;
+    }
 
     public String getTeamNameOutput() {
         return teamNameOutput;
     }
 
-    public String getTeamNumberOutput() {
+    public int getTeamNumberOutput() {
         return teamNumberOutput;
     }
 
-    public String getAutonomousPointsOutput() {
+    public double getAutonomousPointsOutput() {
         return autonomousPointsOutput;
     }
 
-    public String getClimbingPointsOutput() {
+    public double getClimbingPointsOutput() {
         return climbingPointsOutput;
     }
 
-    public String getShootingPointsOutput() {
+    public double getShootingPointsOutput() {
         return shootingPointsOutput;
     }
 
-    public String getWinsOutput() {
+    public int getWinsOutput() {
         return winsOutput;
     }
 
-    public String getLossesOutput() {
+    public int getLossesOutput() {
         return lossesOutput;
     }
 
@@ -48,9 +55,7 @@ private boolean isRunning;
         return isRunning;
     }
 
-    public void GUI() {
-
-        Gui.this.isRunning = true;
+    public void newTeam() {
         ///////////////////////// Frames \\\\\\\\\\\\\\\\\\\\\\\\\
 
         JFrame frame1 = new JFrame();
@@ -307,14 +312,16 @@ private boolean isRunning;
                 String commentsOutput = comments.getText();
 
                 Gui.this.teamNameOutput = teamNameOutput;
-                Gui.this.teamNumberOutput = teamNumberOutput;
-                Gui.this.autonomousPointsOutput = autonomousPointsOutput;
-                Gui.this.shootingPointsOutput = shootingPointsOutput;
-                Gui.this.climbingPointsOutput = climbingPointsOutput;
-                Gui.this.winsOutput = winsOutput;
-                Gui.this.lossesOutput = lossesOutput;
+                Gui.this.teamNumberOutput = Integer.parseInt(teamNumberOutput);
+                Gui.this.autonomousPointsOutput = Double.parseDouble(autonomousPointsOutput);
+                Gui.this.shootingPointsOutput = Double.parseDouble(shootingPointsOutput);
+                Gui.this.climbingPointsOutput = Double.parseDouble(climbingPointsOutput);
+                Gui.this.winsOutput = Integer.parseInt(winsOutput);
+                Gui.this.lossesOutput = Integer.parseInt(lossesOutput);
                 Gui.this.commentsOutput = commentsOutput;
                 Gui.this.isRunning = false;
+                Main.submitted();
+                mainMenu();
 
 
                 frame3.setVisible(false);
@@ -348,6 +355,200 @@ private boolean isRunning;
         frame3.setTitle("Robotics Program - Page 3");
         frame3.pack();
         frame3.setVisible(false);
+
+    }
+    public void mainMenu() {
+        //Frames
+        JFrame frame1 = new JFrame();
+        JFrame selectTeam = new JFrame();
+
+        //Panels
+        JPanel panel1 = new JPanel();
+        panel1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        panel1.setBackground(Color.darkGray);
+        panel1.setForeground(Color.orange);
+
+        JPanel selectTeam1 = new JPanel();
+        selectTeam1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        selectTeam1.setBackground(Color.darkGray);
+        selectTeam1.setForeground(Color.orange);
+
+
+
+
+        // titles
+        JLabel title1 = new JLabel();
+        JButton newTeam = new JButton("New Team");
+        JButton editTeam = new JButton("Edit Team");
+        JButton localFiles = new JButton("Change Directory");
+        JButton browseRoot = new JButton("Open Root Folder");
+        JButton viewTeam = new JButton("View Team Data");
+        JButton compareTeams = new JButton("Compare Teams");
+        JButton close = new JButton("Close");
+        ImageIcon image = new ImageIcon("src/Mechanical Monarchy.png");
+        JLabel logo = new JLabel(image);
+
+
+        JLabel selectTeamTitle = new JLabel();
+        JComboBox<String> selectTeamBox = new JComboBox<>(Objects.requireNonNull(dataManagement.getAllTeams()));
+        ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
+        JLabel logo2 = new JLabel(image2);
+
+
+
+
+
+
+        //fonts and colors
+        Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
+        Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
+        Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+        Color orange = new Color(241, 89, 33);
+
+
+        frame1.add(title1);
+        frame1.add(newTeam);
+        frame1.add(editTeam);
+        frame1.add(localFiles);
+        frame1.add(browseRoot);
+        frame1.add(viewTeam);
+        frame1.add(compareTeams);
+        frame1.add(close);
+        frame1.add(logo);
+
+        selectTeam.add(selectTeam1);
+        selectTeam.add(selectTeamBox);
+        selectTeam.add(selectTeamTitle);
+        selectTeam.add(logo2);
+
+
+        title1.setBounds(50, 0, 1180, 100);
+        title1.setText("Main Menu");
+        title1.setForeground(orange);
+        title1.setFont(titleFont);
+
+
+
+        logo.setBounds(800, 100, 400, 400);
+
+        newTeam.setBounds(25, 100, 300, 50);
+        newTeam.setFont(textFont);
+        newTeam.setBackground(orange);
+        newTeam.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        newTeam.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frame1.setVisible(false);
+                newTeam();
+            }
+        });
+
+        editTeam.setBounds(25, 170, 300, 50);
+        editTeam.setFont(textFont);
+        editTeam.setBackground(orange);
+        editTeam.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        editTeam.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frame1.setVisible(false);
+                System.out.println("Currently in Progress");
+                frame1.setVisible(true);
+            }
+        });
+
+        localFiles.setBounds(25, 240, 300, 50);
+        localFiles.setFont(textFont);
+        localFiles.setBackground(orange);
+        localFiles.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        localFiles.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frame1.setVisible(false);
+                System.out.println("Currently in Progress");
+                frame1.setVisible(true);
+            }
+        });
+
+
+        viewTeam.setBounds(25, 380, 300, 50);
+        viewTeam.setFont(textFont);
+        viewTeam.setBackground(orange);
+        viewTeam.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        viewTeam.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frame1.setVisible(false);
+                System.out.println("Currently in Progress");
+                frame1.setVisible(true);
+
+
+            }
+        });
+
+        browseRoot.setBounds(25, 310, 300, 50);
+        browseRoot.setFont(textFont);
+        browseRoot.setBackground(orange);
+        browseRoot.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        browseRoot.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                String userName = System.getProperty("user.name");
+                try {
+                    String root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+                    File root1 = new File(root);
+                    if(root1.exists()) {
+                        Desktop desktop = Desktop.getDesktop();
+                        desktop.open(root1);
+                    }
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        compareTeams.setBounds(25, 450, 300, 50);
+        compareTeams.setFont(textFont);
+        compareTeams.setBackground(orange);
+        compareTeams.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        compareTeams.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frame1.setVisible(false);
+                System.out.println("Currently in Progress");
+                frame1.setVisible(true);
+
+
+            }
+        });
+
+        close.setBounds(25, 520, 300, 50);
+        close.setFont(textFont);
+        close.setBackground(orange);
+        close.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        close.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                Main.close();
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+        frame1.add(panel1, BorderLayout.CENTER);
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame1.setPreferredSize(new Dimension(1280, 720));
+        frame1.setTitle("Main Menu");
+        frame1.pack();
+        frame1.setVisible(true);
+
+
+
 
     }
 }

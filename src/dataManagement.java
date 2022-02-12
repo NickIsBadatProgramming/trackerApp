@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
+
+
 public class dataManagement {
 
     //makes a new folder
@@ -321,6 +323,54 @@ public class dataManagement {
             x += 1;
         }
         return out;
+    }
+
+    /* -------------------- misc ------------------- */
+
+    public static String readFile(String fileLocation) throws Exception {
+        
+        Scanner reader = new Scanner(new File(fileLocation));
+        if(reader.hasNext()) {
+            return reader.next();
+        }
+       return null;
+    }
+
+    public static int CSVLength(String fileLocation) throws Exception {
+        Scanner reader = new Scanner(new File(fileLocation));
+        reader.useDelimiter(",");
+        int length = 0;
+        for(int x = 1; reader.hasNext(); x++) {
+            reader.next();
+            length = x;
+        }
+        return length;
+    }
+
+
+    public static String[] getAllTeams()  {
+        try {
+            String userName = System.getProperty("user.name");
+            String root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+
+            String[] returner = new String[CSVLength(root + "/allNums.csv")];
+
+            Scanner reader = new Scanner(new File(root + "/allNums.csv"));
+            reader.useDelimiter(",");
+            String out = null;
+            for(int x = 0;x <= (CSVLength(root +"/allNums.csv")-1);x+=1) {
+                    out = reader.next();
+                    returner[x]=out;
+                    System.out.println(returner[x]);
+            }
+            reader.close();
+            return returner;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 }
 
