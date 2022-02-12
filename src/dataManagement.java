@@ -353,6 +353,11 @@ public class dataManagement {
             String userName = System.getProperty("user.name");
             String root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
 
+            File allNums = new File(root + "/allNums.csv");
+            if(!allNums.isFile()) {
+                allNums.createNewFile();
+            }
+
             String[] returner = new String[CSVLength(root + "/allNums.csv")];
 
             Scanner reader = new Scanner(new File(root + "/allNums.csv"));
@@ -361,7 +366,6 @@ public class dataManagement {
             for(int x = 0;x <= (CSVLength(root +"/allNums.csv")-1);x+=1) {
                     out = reader.next();
                     returner[x]=out;
-                    System.out.println(returner[x]);
             }
             reader.close();
             return returner;

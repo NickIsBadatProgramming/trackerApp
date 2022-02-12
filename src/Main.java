@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Main {
     static Gui steve = new Gui();
     static String root;
@@ -29,11 +27,6 @@ public class Main {
 
 
         steve.mainMenu();
-        try {
-            System.out.println(Arrays.toString(dataManagement.getAllTeams()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
     }

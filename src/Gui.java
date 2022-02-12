@@ -405,7 +405,7 @@ private boolean isRunning;
         Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
         Color orange = new Color(241, 89, 33);
 
-
+        //adding stuff
         frame1.add(title1);
         frame1.add(newTeam);
         frame1.add(editTeam);
@@ -421,6 +421,8 @@ private boolean isRunning;
         selectTeam.add(selectTeamTitle);
         selectTeam.add(logo2);
 
+        //bounds and stuff
+
 
         title1.setBounds(50, 0, 1180, 100);
         title1.setText("Main Menu");
@@ -430,6 +432,24 @@ private boolean isRunning;
 
 
         logo.setBounds(800, 100, 400, 400);
+
+        //frame 2
+
+
+        selectTeamTitle.setBounds(50,0,1180,100);
+        selectTeamTitle.setText("Select Team");
+        selectTeamTitle.setForeground(orange);
+        selectTeamTitle.setFont(titleFont);
+
+        logo2.setBounds(800, 100, 400, 400);
+
+        selectTeamBox.setBounds(150, 300, 300, 50);
+        selectTeamBox.setBackground(orange);
+        selectTeamBox.setFont(textFont);
+        selectTeamBox.setForeground(Color.darkGray);
+
+
+        //buttons
 
         newTeam.setBounds(25, 100, 300, 50);
         newTeam.setFont(textFont);
@@ -449,8 +469,7 @@ private boolean isRunning;
         editTeam.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 frame1.setVisible(false);
-                System.out.println("Currently in Progress");
-                frame1.setVisible(true);
+                selectTeam.setVisible(true);
             }
         });
 
@@ -544,8 +563,20 @@ private boolean isRunning;
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setPreferredSize(new Dimension(1280, 720));
         frame1.setTitle("Main Menu");
+        frame1.setBackground(Color.darkGray);
         frame1.pack();
         frame1.setVisible(true);
+
+
+
+        selectTeam.add(panel1, BorderLayout.CENTER);
+        selectTeam.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        selectTeam.setPreferredSize(new Dimension(1280, 720));
+        selectTeam.setTitle("Select Team");
+        selectTeam.pack();
+        selectTeam.setVisible(false);
+
+
 
 
 
