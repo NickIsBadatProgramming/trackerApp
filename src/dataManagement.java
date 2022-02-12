@@ -310,11 +310,11 @@ public class dataManagement {
 */
 
     /* ------------------- new getters --------------------- */
-    public static String getData(int locationNum, String root, int teamNumber) throws Exception {
+    public static String getData(int locationNum, String root, String fileName) throws Exception {
         if (!checkForSlash(root)) {
             root += "/";
         }
-        Scanner reader = new Scanner(new File(root + teamNumber + ".csv"));
+        Scanner reader = new Scanner(new File(root + fileName));
         reader.useDelimiter(",");
         int x = 0;
         String out = null;
@@ -322,6 +322,7 @@ public class dataManagement {
             out = reader.next();
             x += 1;
         }
+        reader.close();
         return out;
     }
 
@@ -331,9 +332,13 @@ public class dataManagement {
         
         Scanner reader = new Scanner(new File(fileLocation));
         if(reader.hasNext()) {
-            return reader.next();
+            String out = reader.next();
+            reader.close();
+            return out;
         }
+        reader.close();
        return null;
+
     }
 
     public static int CSVLength(String fileLocation) throws Exception {
@@ -344,37 +349,75 @@ public class dataManagement {
             reader.next();
             length = x;
         }
+        reader.close();
         return length;
     }
 
 
-    public static String[] getAllTeams()  {
+
+   /* public static void addToAllCSV(int teamNumberAdd) throws Exception {
+        String userName = System.getProperty("user.name");
+        String root = null;
         try {
-            String userName = System.getProperty("user.name");
-            String root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
-
-            File allNums = new File(root + "/allNums.csv");
-            if(!allNums.isFile()) {
-                allNums.createNewFile();
-            }
-
-            String[] returner = new String[CSVLength(root + "/allNums.csv")];
-
-            Scanner reader = new Scanner(new File(root + "/allNums.csv"));
-            reader.useDelimiter(",");
-            String out = null;
-            for(int x = 0;x <= (CSVLength(root +"/allNums.csv")-1);x+=1) {
-                    out = reader.next();
-                    returner[x]=out;
-            }
-            reader.close();
-            return returner;
-
+            root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
 
+        File allNumsCSV = new File(root + "allNums.csv");
+
+        if(allNumsCSV.exists()) {
+            dataManagement.writeToFile(root,"allNums.csv",dataManagement.readFile(root + "allNums.csv") + "," + teamNumberAdd);
+        }
+        else {
+            dataManagement.createFile(root,"allNums.csv");
+            dataManagement.writeToFile(root,"allNums.csv",Integer.toString(teamNumberAdd));
+        }
+
+    }
+    public static void removeFromAllCSV(String teamNumberRemove) throws Exception {
+        String userName = System.getProperty("user.name");
+        String root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+        String[] allTeams = new String[dataManagement.CSVLength(root + "/allNums.csv")];
+        String newCSVText = "";
+
+        allTeams = dataManagement.getAllTeams();
+        for(int i = 0; i <= (dataManagement.CSVLength(root + "/allNums.csv"))-1; i++) {
+            if(allTeams[i] != teamNumberRemove) {
+                newCSVText = (newCSVText + allTeams[i] + ",");
+
+            }
+        }
+        dataManagement.writeToFile(root,"allNums.csv",newCSVText);
+
+    } */
+    public static String stripExtension (String str) {
+        // Handle null case specially.
+
+        if (str == null) return null;
+
+        // Get position of last '.'.
+
+        int pos = str.lastIndexOf(".");
+
+        // If there wasn't any '.' just return the string as is.
+
+        if (pos == -1) return str;
+
+        // Otherwise return the string, up to the dot.
+
+        return str.substring(0, pos);
+    }
+    public static String[] updateFileList() {
+        String userName = System.getProperty("user.name");
+        String root = null;
+        try {
+            root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        File F1 = new File(root);
+        return F1.list();
     }
 }
 

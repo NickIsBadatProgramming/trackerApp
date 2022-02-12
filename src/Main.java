@@ -1,5 +1,5 @@
 public class Main {
-    static Gui steve = new Gui();
+    static Gui g1 = new Gui();
     static String root;
 
     public static void main(String[] args) {
@@ -25,8 +25,7 @@ public class Main {
             case 2 -> System.out.println("Data folder located");
         }
 
-
-        steve.mainMenu();
+        g1.mainMenu();
 
 
     }
@@ -37,7 +36,11 @@ public class Main {
         System.exit(0);
     }
     public static void submitted() {
-        NewRobot R1 = new NewRobot(steve.getTeamNumberOutput(),steve.getTeamNameOutput(),steve.getCommentsOutput(),steve.getClimbingPointsOutput(),steve.getShootingPointsOutput(),steve.getAutonomousPointsOutput(),steve.getWinsOutput(),steve.getLossesOutput());
+        NewRobot R1 = new NewRobot(g1.getTeamNumberOutput(),g1.getTeamNameOutput(),g1.getCommentsOutput(),g1.getClimbingPointsOutput(),g1.getShootingPointsOutput(),g1.getAutonomousPointsOutput(),g1.getWinsOutput(),g1.getLossesOutput());
+        R1.compileData(root);
+    }
+    public static void edited() {
+        NewRobot R1 = new NewRobot(g1.getTeamNumberOutput(),g1.getTeamNameOutput(),g1.getCommentsOutput(),g1.getClimbingPointsOutput(),g1.getShootingPointsOutput(),g1.getAutonomousPointsOutput(),g1.getWinsOutput(),g1.getLossesOutput());
         R1.compileData(root);
     }
 }

@@ -1,5 +1,3 @@
-import java.io.File;
-
 public class NewRobot {
     private String teamName; //
     // teamNumber is used to reference all robot data
@@ -155,15 +153,6 @@ public class NewRobot {
                 dataManagement.writeToFile(root , this.teamNumber + ".csv", this.teamName + "," + this.comments + "," + this.shootingPoints + "," + this.climbingPoints + "," + this.autonomousPoints + "," + this.wins + "," + this.losses);
             }
 
-            File allNumsCSV = new File(root + "allNums.csv");
-
-            if(allNumsCSV.exists()) {
-                dataManagement.writeToFile(root,"allNums.csv",dataManagement.readFile(root + "allNums.csv") + "," + this.teamNumber);
-            }
-            else {
-                dataManagement.createFile(root,"allNums.csv");
-                dataManagement.writeToFile(root,"allNums.csv",Integer.toString(this.teamNumber));
-            }
 
         }
         catch(Exception e) {
@@ -171,6 +160,7 @@ public class NewRobot {
         }
 
     }
+
 
 
 }
