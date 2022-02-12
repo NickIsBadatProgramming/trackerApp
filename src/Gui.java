@@ -569,7 +569,7 @@ private boolean isRunning;
 
 
 
-        selectTeam.add(panel1, BorderLayout.CENTER);
+        selectTeam.add(selectTeam1, BorderLayout.CENTER);
         selectTeam.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         selectTeam.setPreferredSize(new Dimension(1280, 720));
         selectTeam.setTitle("Select Team");
