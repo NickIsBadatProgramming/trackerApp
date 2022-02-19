@@ -502,7 +502,7 @@ private int teamSelected;
         String finalRoot = root;
         localFiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                JFileChooser();
+                fileChooser();
                 frame1.setVisible(false);
             }
         });
@@ -1174,7 +1174,7 @@ private int teamSelected;
 
 
     ////////////////File Chooser\\\\\\\\\\\\\\\\\\
-    public void JFileChooser() {
+    public void fileChooser() {
         String userName = System.getProperty("user.name");
         String root = null;
         try {
@@ -1196,6 +1196,8 @@ private int teamSelected;
                 mainMenu();
             }
         });
+
+        fc.showOpenDialog(null);
 
 
     }
