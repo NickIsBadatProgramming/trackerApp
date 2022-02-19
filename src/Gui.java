@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -497,11 +499,11 @@ private int teamSelected;
         localFiles.setFont(textFont);
         localFiles.setBackground(orange);
         localFiles.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        String finalRoot = root;
         localFiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                JFileChooser();
                 frame1.setVisible(false);
-                System.out.println("Currently in Progress");
-                frame1.setVisible(true);
             }
         });
 
@@ -513,8 +515,101 @@ private int teamSelected;
         viewTeam.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 frame1.setVisible(false);
-                System.out.println("Currently in Progress");
-                frame1.setVisible(true);
+
+                //init frames
+                JFrame selectTeam = new JFrame();
+
+                //Panels
+                JPanel selectTeam1 = new JPanel();
+                selectTeam1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+                selectTeam1.setBackground(Color.darkGray);
+                selectTeam1.setForeground(Color.orange);
+
+                //Titles
+                JLabel selectTeamTitle = new JLabel();
+                String userName = System.getProperty("user.name");
+                String root = null;
+                try {
+                    root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                File F1 = new File(root);
+                JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.updateFileList());
+                ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
+                JButton done = new JButton("Done");
+                JButton cancel = new JButton("Cancel");
+                JLabel logo2 = new JLabel(image2);
+
+                selectTeam.add(selectTeam1);
+                selectTeam.add(selectTeamBox);
+                selectTeam.add(selectTeamTitle);
+                selectTeam.add(done);
+                selectTeam.add(cancel);
+                selectTeam.add(logo2);
+
+
+                //fonts and colors
+                Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
+                Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
+                Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+                Color orange = new Color(241, 89, 33);
+
+
+                //Bounds
+                selectTeamTitle.setBounds(50, 0, 1180, 100);
+                selectTeamTitle.setText("Select Team");
+                selectTeamTitle.setForeground(orange);
+                selectTeamTitle.setFont(titleFont);
+
+                logo2.setBounds(800, 100, 400, 400);
+
+                selectTeamBox.setBounds(150, 300, 300, 50);
+                selectTeamBox.setBackground(orange);
+                selectTeamBox.setFont(textFont);
+                selectTeamBox.setForeground(Color.darkGray);
+
+
+                done.setBounds(150, 520, 300, 50);
+                done.setFont(textFont);
+                done.setBackground(orange);
+                done.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+                done.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        selectTeam.setVisible(false);
+                        try {
+                            displayTeam(selectTeamBox.getItemAt(selectTeamBox.getSelectedIndex()));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                });
+
+
+                cancel.setBounds(150, 580, 300, 50);
+                cancel.setFont(textFont);
+                cancel.setBackground(orange);
+                cancel.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+                cancel.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        selectTeam.setVisible(false);
+                        frame1.setVisible(true);
+
+
+                    }
+                });
+
+
+                selectTeam.add(selectTeam1, BorderLayout.CENTER);
+                selectTeam.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                selectTeam.setPreferredSize(new Dimension(1280, 720));
+                selectTeam.setTitle("Select Team");
+                selectTeam.pack();
+                selectTeam.setVisible(true);
+
 
 
             }
@@ -549,8 +644,107 @@ private int teamSelected;
         compareTeams.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 frame1.setVisible(false);
-                System.out.println("Currently in Progress");
-                frame1.setVisible(true);
+
+                //init frames
+                JFrame selectTeam = new JFrame();
+
+                //Panels
+                JPanel selectTeam1 = new JPanel();
+                selectTeam1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+                selectTeam1.setBackground(Color.darkGray);
+                selectTeam1.setForeground(Color.orange);
+
+                //Titles
+                JLabel selectTeamTitle = new JLabel();
+                String userName = System.getProperty("user.name");
+                String root = null;
+                try {
+                    root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                File F1 = new File(root);
+                JComboBox<String> selectTeamBox1 = new JComboBox<>(dataManagement.updateFileList());
+                JComboBox<String> selectTeamBox2 = new JComboBox<>(dataManagement.updateFileList());
+                ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
+                JButton done = new JButton("Done");
+                JButton cancel = new JButton("Cancel");
+                JLabel logo2 = new JLabel(image2);
+
+                selectTeam.add(selectTeam1);
+                selectTeam.add(selectTeamBox1);
+                selectTeam.add(selectTeamBox2);
+                selectTeam.add(selectTeamTitle);
+                selectTeam.add(done);
+                selectTeam.add(cancel);
+                selectTeam.add(logo2);
+
+
+                //fonts and colors
+                Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
+                Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
+                Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+                Color orange = new Color(241, 89, 33);
+
+
+                //Bounds
+                selectTeamTitle.setBounds(50, 0, 1180, 100);
+                selectTeamTitle.setText("Select Team");
+                selectTeamTitle.setForeground(orange);
+                selectTeamTitle.setFont(titleFont);
+
+                logo2.setBounds(800, 100, 400, 400);
+
+                selectTeamBox1.setBounds(50, 300, 300, 50);
+                selectTeamBox1.setBackground(orange);
+                selectTeamBox1.setFont(textFont);
+                selectTeamBox1.setForeground(Color.darkGray);
+
+                selectTeamBox2.setBounds(400, 300, 300, 50);
+                selectTeamBox2.setBackground(orange);
+                selectTeamBox2.setFont(textFont);
+                selectTeamBox2.setForeground(Color.darkGray);
+
+
+                done.setBounds(150, 520, 300, 50);
+                done.setFont(textFont);
+                done.setBackground(orange);
+                done.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+                done.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        selectTeam.setVisible(false);
+                        try {
+                            displayTeam(selectTeamBox1.getItemAt(selectTeamBox1.getSelectedIndex()),selectTeamBox2.getItemAt(selectTeamBox2.getSelectedIndex()));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                });
+
+
+                cancel.setBounds(150, 580, 300, 50);
+                cancel.setFont(textFont);
+                cancel.setBackground(orange);
+                cancel.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+                cancel.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        selectTeam.setVisible(false);
+                        frame1.setVisible(true);
+
+
+                    }
+                });
+
+
+                selectTeam.add(selectTeam1, BorderLayout.CENTER);
+                selectTeam.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                selectTeam.setPreferredSize(new Dimension(1280, 720));
+                selectTeam.setTitle("Select Team");
+                selectTeam.pack();
+                selectTeam.setVisible(true);
 
 
             }
@@ -567,6 +761,14 @@ private int teamSelected;
 
             }
         });
+
+
+
+
+
+
+
+
 
         done.setBounds(150, 520, 300, 50);
         done.setFont(textFont);
@@ -596,6 +798,13 @@ private int teamSelected;
 
             }
         });
+
+
+
+
+
+
+
 
 
 
@@ -905,7 +1114,6 @@ private int teamSelected;
                 Gui.this.commentsOutput = commentsOutput;
                 Gui.this.isRunning = false;
                 Main.submitted();
-                mainMenu();
                 String userName = System.getProperty("user.name");
                 String root = null;
                 try {
@@ -924,6 +1132,9 @@ private int teamSelected;
                     }
 
                 }
+                mainMenu();
+
+
 
 
 
@@ -959,4 +1170,444 @@ private int teamSelected;
         frame3.setVisible(false);
 
     }
+
+
+
+    ////////////////File Chooser\\\\\\\\\\\\\\\\\\
+    public void JFileChooser() {
+        String userName = System.getProperty("user.name");
+        String root = null;
+        try {
+            root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JFileChooser fc = new JFileChooser(root);
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+
+        fc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(fc.getSelectedFile() != null) {
+                    File selected = fc.getSelectedFile();
+                    dataManagement.writeToFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/","dataLocation.txt", selected.getAbsolutePath());
+                }
+                mainMenu();
+            }
+        });
+
+
+    }
+
+
+    public void displayTeam(String teamFile) throws Exception {
+        //init frame
+        JFrame displayWindow = new JFrame();
+
+        //fonts and colors
+        Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
+        Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
+        Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+        Color orange = new Color(241, 89, 33);
+
+        //panels
+        JPanel panel1 = new JPanel();
+        panel1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        panel1.setBackground(Color.darkGray);
+        panel1.setForeground(Color.orange);
+
+        //titles
+        JLabel title1 = new JLabel();
+        JTextArea teamInfo = new JTextArea();
+        JButton done = new JButton("Done");
+        teamInfo.setBounds(new Rectangle(50,100,1150,500));
+        teamInfo.setBackground(Color.lightGray);
+        teamInfo.setFont(textFont);
+        teamInfo.setEditable(false);
+
+        //getting text data
+        String userName = System.getProperty("user.name");
+        String root = null;
+        try {
+            root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        teamInfo.setText("Team Number: "+ dataManagement.stripExtension(teamFile) +"\n");
+        teamInfo.append("Team Name: " + dataManagement.getData(0,root,teamFile) + "\n");
+        teamInfo.append("Comments: " + dataManagement.getData(1,root,teamFile) + "\n\n");
+        teamInfo.append("Shooting Points: " + dataManagement.getData(2,root,teamFile) + "\n");
+        teamInfo.append("Climbing Points: " + dataManagement.getData(3,root,teamFile) + "\n");
+        teamInfo.append("Autonomous Points: " + dataManagement.getData(4,root,teamFile) + "\n\n");
+        teamInfo.append("Wins: " + dataManagement.getData(5,root,teamFile) + "\n");
+        teamInfo.append("Losses: " + dataManagement.getData(6,root,teamFile) + "\n");
+
+        teamInfo.setLineWrap(true);
+        teamInfo.setWrapStyleWord(true);
+
+
+
+
+
+
+
+
+
+        //adding stuff
+        displayWindow.add(title1);
+        displayWindow.add(teamInfo);
+        displayWindow.add(done);
+
+        //buttons
+        done.setBounds(1000, 610, 200, 50);
+        done.setFont(textFont);
+        done.setBackground(orange);
+        done.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        done.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                displayWindow.setVisible(false);
+                Gui.this.mainMenu();
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+        title1.setBounds(50, 0, 1180, 100);
+        title1.setText(dataManagement.stripExtension(teamFile));
+        title1.setForeground(orange);
+        title1.setFont(titleFont);
+
+
+
+
+        displayWindow.add(panel1, BorderLayout.CENTER);
+        displayWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        displayWindow.setPreferredSize(new Dimension(1280, 720));
+        displayWindow.setTitle(dataManagement.stripExtension(teamFile));
+        displayWindow.setBackground(Color.darkGray);
+        displayWindow.pack();
+        displayWindow.setVisible(true);
+
+
+
+
+
+
+    }
+    public void displayTeam(String teamFile1, String teamFile2) throws Exception {
+        //init frame
+        JFrame displayWindow = new JFrame();
+
+        //fonts and colors
+        Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
+        Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
+        Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+        Color orange = new Color(241, 89, 33);
+
+        //panels
+        JPanel panel1 = new JPanel();
+        panel1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        panel1.setBackground(Color.darkGray);
+        panel1.setForeground(Color.orange);
+
+        //titles
+        JLabel title1 = new JLabel();
+        JTextArea teamInfo1 = new JTextArea();
+        JButton done = new JButton("Done");
+        teamInfo1.setBounds(new Rectangle(50,100,570,500));
+        teamInfo1.setBackground(Color.lightGray);
+        teamInfo1.setFont(textFont);
+        teamInfo1.setEditable(false);
+        JTextArea teamInfo2 = new JTextArea();
+        teamInfo2.setBounds(new Rectangle(630,100,570,500));
+        teamInfo2.setBackground(Color.lightGray);
+        teamInfo2.setFont(textFont);
+        teamInfo2.setEditable(false);
+
+
+        //getting text data
+        String userName = System.getProperty("user.name");
+        String root = null;
+        try {
+            root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        teamInfo1.setText("Team Number: "+ dataManagement.stripExtension(teamFile1) +"\n");
+        teamInfo1.append("Team Name: " + dataManagement.getData(0,root,teamFile1) + "\n");
+        teamInfo1.append("Comments: " + dataManagement.getData(1,root,teamFile1) + "\n\n");
+        teamInfo1.append("Shooting Points: " + dataManagement.getData(2,root,teamFile1) + "\n");
+        teamInfo1.append("Climbing Points: " + dataManagement.getData(3,root,teamFile1) + "\n");
+        teamInfo1.append("Autonomous Points: " + dataManagement.getData(4,root,teamFile1) + "\n\n");
+        teamInfo1.append("Wins: " + dataManagement.getData(5,root,teamFile1) + "\n");
+        teamInfo1.append("Losses: " + dataManagement.getData(6,root,teamFile1) + "\n");
+
+        Highlighter highlighter1 = teamInfo1.getHighlighter();
+        Highlighter.HighlightPainter highPainter1 = new DefaultHighlighter.DefaultHighlightPainter(Color.yellow);
+        if(Double.parseDouble(dataManagement.getData(2,root,teamFile1))>Double.parseDouble((dataManagement.getData(2,root,teamFile2)))) {
+            int p0 = teamInfo1.getText().indexOf(dataManagement.getData(2,root,teamFile1));
+            int p1 = p0 + dataManagement.getData(2,root,teamFile1).length();
+            highlighter1.addHighlight(p0,p1,highPainter1);
+        }
+        if(Double.parseDouble(dataManagement.getData(3,root,teamFile1))>Double.parseDouble((dataManagement.getData(3,root,teamFile2)))) {
+            int p0 = teamInfo1.getText().indexOf(dataManagement.getData(3,root,teamFile1));
+            int p1 = p0 + dataManagement.getData(3,root,teamFile1).length();
+            highlighter1.addHighlight(p0,p1,highPainter1);
+        }
+        if(Double.parseDouble(dataManagement.getData(4,root,teamFile1))>Double.parseDouble((dataManagement.getData(4,root,teamFile2)))) {
+            int p0 = teamInfo1.getText().indexOf(dataManagement.getData(4,root,teamFile1));
+            int p1 = p0 + dataManagement.getData(4,root,teamFile1).length();
+            highlighter1.addHighlight(p0,p1,highPainter1);
+        }
+        if(Integer.parseInt(dataManagement.getData(5,root,teamFile1))>Integer.parseInt((dataManagement.getData(5,root,teamFile2)))) {
+            int p0 = teamInfo1.getText().indexOf(dataManagement.getData(5,root,teamFile1));
+            int p1 = p0 + dataManagement.getData(5,root,teamFile1).length();
+            highlighter1.addHighlight(p0,p1,highPainter1);
+        }
+        if(Integer.parseInt(dataManagement.getData(6,root,teamFile1))<Integer.parseInt((dataManagement.getData(6,root,teamFile2)))) {
+            int p0 = teamInfo1.getText().indexOf(dataManagement.getData(6,root,teamFile1));
+            int p1 = p0 + dataManagement.getData(6,root,teamFile1).length();
+            highlighter1.addHighlight(p0,p1,highPainter1);
+        }
+
+
+
+
+
+
+        teamInfo1.setLineWrap(true);
+        teamInfo1.setWrapStyleWord(true);
+
+        teamInfo2.setText("Team Number: "+ dataManagement.stripExtension(teamFile2) +"\n");
+        teamInfo2.append("Team Name: " + dataManagement.getData(0,root,teamFile2) + "\n");
+        teamInfo2.append("Comments: " + dataManagement.getData(1,root,teamFile2) + "\n\n");
+        teamInfo2.append("Shooting Points: " + dataManagement.getData(2,root,teamFile2) + "\n");
+        teamInfo2.append("Climbing Points: " + dataManagement.getData(3,root,teamFile2) + "\n");
+        teamInfo2.append("Autonomous Points: " + dataManagement.getData(4,root,teamFile2) + "\n\n");
+        teamInfo2.append("Wins: " + dataManagement.getData(5,root,teamFile2) + "\n");
+        teamInfo2.append("Losses: " + dataManagement.getData(6,root,teamFile2) + "\n");
+
+
+        Highlighter highlighter2 = teamInfo2.getHighlighter();
+        Highlighter.HighlightPainter highPainter2 = new DefaultHighlighter.DefaultHighlightPainter(Color.yellow);
+        if(Double.parseDouble(dataManagement.getData(2,root,teamFile2))>Double.parseDouble((dataManagement.getData(2,root,teamFile1)))) {
+            int p0 = teamInfo2.getText().indexOf(dataManagement.getData(2,root,teamFile2));
+            int p1 = p0 + dataManagement.getData(2,root,teamFile2).length();
+            highlighter2.addHighlight(p0,p1,highPainter2);
+        }
+        if(Double.parseDouble(dataManagement.getData(3,root,teamFile2))>Double.parseDouble((dataManagement.getData(3,root,teamFile1)))) {
+            int p0 = teamInfo2.getText().indexOf(dataManagement.getData(3,root,teamFile2));
+            int p1 = p0 + dataManagement.getData(3,root,teamFile2).length();
+            highlighter2.addHighlight(p0,p1,highPainter2);
+        }
+        if(Double.parseDouble(dataManagement.getData(4,root,teamFile2))>Double.parseDouble((dataManagement.getData(4,root,teamFile1)))) {
+            int p0 = teamInfo2.getText().indexOf(dataManagement.getData(4,root,teamFile2));
+            int p1 = p0 + dataManagement.getData(4,root,teamFile2).length();
+            highlighter2.addHighlight(p0,p1,highPainter2);
+        }
+        if(Integer.parseInt(dataManagement.getData(5,root,teamFile2))>Integer.parseInt((dataManagement.getData(5,root,teamFile1)))) {
+            int p0 = teamInfo2.getText().indexOf(dataManagement.getData(5,root,teamFile2));
+            int p1 = p0 + dataManagement.getData(5,root,teamFile2).length();
+            highlighter2.addHighlight(p0,p1,highPainter2);
+        }
+        if(Integer.parseInt(dataManagement.getData(6,root,teamFile2))<Integer.parseInt((dataManagement.getData(6,root,teamFile1)))) {
+            int p0 = teamInfo2.getText().indexOf(dataManagement.getData(6,root,teamFile2));
+            int p1 = p0 + dataManagement.getData(6,root,teamFile2).length();
+            highlighter2.addHighlight(p0,p1,highPainter2);
+        }
+
+
+        teamInfo2.setLineWrap(true);
+        teamInfo2.setWrapStyleWord(true);
+
+
+
+
+
+
+
+
+
+
+
+        //adding stuff
+        displayWindow.add(title1);
+        displayWindow.add(teamInfo1);
+        displayWindow.add(teamInfo2);
+        displayWindow.add(done);
+
+        //buttons
+        done.setBounds(1000, 610, 200, 50);
+        done.setFont(textFont);
+        done.setBackground(orange);
+        done.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        done.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                displayWindow.setVisible(false);
+                Gui.this.mainMenu();
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+        title1.setBounds(50, 0, 1180, 100);
+        title1.setText(dataManagement.stripExtension(teamFile1) + " vs. " + dataManagement.stripExtension(teamFile2));
+        title1.setForeground(orange);
+        title1.setFont(titleFont);
+
+
+
+
+        displayWindow.add(panel1, BorderLayout.CENTER);
+        displayWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        displayWindow.setPreferredSize(new Dimension(1280, 720));
+        displayWindow.setTitle(dataManagement.stripExtension(teamFile1) + " vs. " + dataManagement.stripExtension(teamFile2));
+        displayWindow.setBackground(Color.darkGray);
+        displayWindow.pack();
+        displayWindow.setVisible(true);
+
+
+
+
+
+
+    }
+
+
+
+
+    ///////////////////Team Selector\\\\\\\\\\\\\\\\\\\\
+
+    /*
+    public static String selectTeam(String title) {
+
+
+            //init frames
+            JFrame selectTeam = new JFrame();
+
+            //Panels
+            JPanel selectTeam1 = new JPanel();
+            selectTeam1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+            selectTeam1.setBackground(Color.darkGray);
+            selectTeam1.setForeground(Color.orange);
+
+            //Titles
+            JLabel selectTeamTitle = new JLabel();
+            String userName = System.getProperty("user.name");
+            String root = null;
+            try {
+                root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            File F1 = new File(root);
+            JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.updateFileList());
+            ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
+            JButton done = new JButton("Done");
+            JButton cancel = new JButton("Cancel");
+            JLabel logo2 = new JLabel(image2);
+
+            selectTeam.add(selectTeam1);
+            selectTeam.add(selectTeamBox);
+            selectTeam.add(selectTeamTitle);
+            selectTeam.add(done);
+            selectTeam.add(cancel);
+            selectTeam.add(logo2);
+
+
+            //fonts and colors
+            Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
+            Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
+            Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+            Color orange = new Color(241, 89, 33);
+
+
+            //Bounds
+            selectTeamTitle.setBounds(50, 0, 1180, 100);
+            selectTeamTitle.setText("Select Team");
+            selectTeamTitle.setForeground(orange);
+            selectTeamTitle.setFont(titleFont);
+
+            logo2.setBounds(800, 100, 400, 400);
+
+            selectTeamBox.setBounds(150, 300, 300, 50);
+            selectTeamBox.setBackground(orange);
+            selectTeamBox.setFont(textFont);
+            selectTeamBox.setForeground(Color.darkGray);
+
+
+            done.setBounds(150, 520, 300, 50);
+            done.setFont(textFont);
+            done.setBackground(orange);
+            done.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+            done.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+                    selectTeam.setVisible(false);
+
+
+
+                }
+            });
+
+
+            cancel.setBounds(150, 580, 300, 50);
+            cancel.setFont(textFont);
+            cancel.setBackground(orange);
+            cancel.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+            cancel.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+                    selectTeam.setVisible(false);
+
+
+                }
+            });
+
+
+            selectTeam.add(selectTeam1, BorderLayout.CENTER);
+            selectTeam.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            selectTeam.setPreferredSize(new Dimension(1280, 720));
+            selectTeam.setTitle(title);
+            selectTeam.pack();
+            selectTeam.setVisible(true);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     */
 }
