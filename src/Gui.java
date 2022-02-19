@@ -331,21 +331,32 @@ private int teamSelected;
                 String winsOutput = wins.getText();
                 String lossesOutput = losses.getText();
                 String commentsOutput = comments.getText();
+                try {
+                    Gui.this.teamNameOutput = teamNameOutput;
+                    Gui.this.teamNumberOutput = Integer.parseInt(teamNumberOutput);
+                    Gui.this.autonomousPointsOutput = Double.parseDouble(autonomousPointsOutput);
+                    Gui.this.shootingPointsOutput = Double.parseDouble(shootingPointsOutput);
+                    Gui.this.climbingPointsOutput = Double.parseDouble(climbingPointsOutput);
+                    Gui.this.winsOutput = Integer.parseInt(winsOutput);
+                    Gui.this.lossesOutput = Integer.parseInt(lossesOutput);
+                    Gui.this.commentsOutput = commentsOutput;
+                    Gui.this.isRunning = false;
+                    Main.submitted();
+                    mainMenu();
+                    frame3.setVisible(false);
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                    JFrame frame = new JFrame();
+                    frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+                    JOptionPane.showMessageDialog(frame,"Text fields contain unsupported data types \nor they might be null","Error",JOptionPane.WARNING_MESSAGE);
 
-                Gui.this.teamNameOutput = teamNameOutput;
-                Gui.this.teamNumberOutput = Integer.parseInt(teamNumberOutput);
-                Gui.this.autonomousPointsOutput = Double.parseDouble(autonomousPointsOutput);
-                Gui.this.shootingPointsOutput = Double.parseDouble(shootingPointsOutput);
-                Gui.this.climbingPointsOutput = Double.parseDouble(climbingPointsOutput);
-                Gui.this.winsOutput = Integer.parseInt(winsOutput);
-                Gui.this.lossesOutput = Integer.parseInt(lossesOutput);
-                Gui.this.commentsOutput = commentsOutput;
-                Gui.this.isRunning = false;
-                Main.submitted();
-                mainMenu();
+                }
 
 
-                frame3.setVisible(false);
+
+
+
             }
         });
 
@@ -1132,35 +1143,45 @@ private int teamSelected;
                 String lossesOutput = losses.getText();
                 String commentsOutput = comments.getText();
 
-                Gui.this.teamNameOutput = teamNameOutput;
-                Gui.this.teamNumberOutput = Integer.parseInt(teamNumberOutput);
-                Gui.this.autonomousPointsOutput = Double.parseDouble(autonomousPointsOutput);
-                Gui.this.shootingPointsOutput = Double.parseDouble(shootingPointsOutput);
-                Gui.this.climbingPointsOutput = Double.parseDouble(climbingPointsOutput);
-                Gui.this.winsOutput = Integer.parseInt(winsOutput);
-                Gui.this.lossesOutput = Integer.parseInt(lossesOutput);
-                Gui.this.commentsOutput = commentsOutput;
-                Gui.this.isRunning = false;
-                Main.submitted();
-                String userName = System.getProperty("user.name");
-                String root = null;
                 try {
-                    root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-                if(Integer.parseInt(dataManagement.stripExtension(file)) != Integer.parseInt(teamNumberOutput)) {
-
-                    frame3.setVisible(false);
+                    Gui.this.teamNameOutput = teamNameOutput;
+                    Gui.this.teamNumberOutput = Integer.parseInt(teamNumberOutput);
+                    Gui.this.autonomousPointsOutput = Double.parseDouble(autonomousPointsOutput);
+                    Gui.this.shootingPointsOutput = Double.parseDouble(shootingPointsOutput);
+                    Gui.this.climbingPointsOutput = Double.parseDouble(climbingPointsOutput);
+                    Gui.this.winsOutput = Integer.parseInt(winsOutput);
+                    Gui.this.lossesOutput = Integer.parseInt(lossesOutput);
+                    Gui.this.commentsOutput = commentsOutput;
+                    Gui.this.isRunning = false;
+                    Main.submitted();
+                    String userName = System.getProperty("user.name");
+                    String root = null;
                     try {
-                        Files.deleteIfExists(Paths.get(root+"/"+file));
-                    } catch (IOException e) {
+                        root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
+                    if (Integer.parseInt(dataManagement.stripExtension(file)) != Integer.parseInt(teamNumberOutput)) {
+
+                        frame3.setVisible(false);
+                        try {
+                            Files.deleteIfExists(Paths.get(root + "/" + file));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    mainMenu();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    JFrame frame = new JFrame();
+                    frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+                    JOptionPane.showMessageDialog(frame,"Text fields contain unsupported data types \nor they might be null","Error",JOptionPane.WARNING_MESSAGE);
+
+
                 }
-                mainMenu();
 
 
 
