@@ -119,6 +119,8 @@ private int teamSelected;
         JTextField comments = new JTextField();
         JButton lastButton3 = new JButton("Last Page");
 
+        JButton cancel = new JButton("Cancel");
+
 
 
         // Additional Items
@@ -138,6 +140,7 @@ private int teamSelected;
         frame1.add(nextButton1);
         frame1.add(logo);
 
+
         // Frame 2
         frame2.add(title2);
         frame2.add(autonomousPoints);
@@ -146,6 +149,7 @@ private int teamSelected;
         frame2.add(lastButton1);
         frame2.add(nextButton2);
 
+
         //Frame 3
         frame3.add(title3);
         frame3.add(wins);
@@ -153,6 +157,7 @@ private int teamSelected;
         frame3.add(comments);
         frame3.add(lastButton3);
         frame3.add(submitButton);
+        frame3.add(cancel);
 
 
 
@@ -296,6 +301,17 @@ private int teamSelected;
             }
         });
 
+        cancel.setBounds(1000, 500, 200, 50);
+        cancel.setFont(textFont);
+        cancel.setBackground(orange);
+        cancel.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        cancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frame3.setVisible(false);
+                mainMenu();
+            }
+        });
+
 
 
 
@@ -405,7 +421,6 @@ private int teamSelected;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        File F1 = new File(root);
         JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.updateFileList());
         ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
         JButton done = new JButton("Done");
@@ -535,9 +550,9 @@ private int teamSelected;
                     e.printStackTrace();
                 }
 
-                File F1 = new File(root);
+
                 JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.updateFileList());
-                ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
+                ImageIcon image2 = new ImageIcon("Mechanical Monarchy.png");
                 JButton done = new JButton("Done");
                 JButton cancel = new JButton("Cancel");
                 JLabel logo2 = new JLabel(image2);
@@ -906,6 +921,7 @@ private int teamSelected;
         JTextField losses = new JTextField(dataManagement.getData(6,root,file));
         JTextField comments = new JTextField(dataManagement.getData(1,root,file));
         JButton lastButton3 = new JButton("Last Page");
+        JButton cancel = new JButton("Cancel");
 
 
 
@@ -941,6 +957,7 @@ private int teamSelected;
         frame3.add(comments);
         frame3.add(lastButton3);
         frame3.add(submitButton);
+        frame3.add(cancel);
 
 
 
@@ -1081,6 +1098,17 @@ private int teamSelected;
             public void actionPerformed(ActionEvent event) {
                 frame2.setVisible(true);
                 frame3.setVisible(false);
+            }
+        });
+
+        cancel.setBounds(1000, 500, 200, 50);
+        cancel.setFont(textFont);
+        cancel.setBackground(orange);
+        cancel.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        cancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                frame3.setVisible(false);
+                mainMenu();
             }
         });
 

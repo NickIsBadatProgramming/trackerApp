@@ -39,11 +39,5 @@ public class Main {
         NewRobot R1 = new NewRobot(g1.getTeamNumberOutput(),g1.getTeamNameOutput(),g1.getCommentsOutput(),g1.getClimbingPointsOutput(),g1.getShootingPointsOutput(),g1.getAutonomousPointsOutput(),g1.getWinsOutput(),g1.getLossesOutput());
         R1.compileData(root);
     }
-    public static void edited() {
-        NewRobot R1 = new NewRobot(g1.getTeamNumberOutput(),g1.getTeamNameOutput(),g1.getCommentsOutput(),g1.getClimbingPointsOutput(),g1.getShootingPointsOutput(),g1.getAutonomousPointsOutput(),g1.getWinsOutput(),g1.getLossesOutput());
-        R1.compileData(root);
-    }
-    public static void refreshGui(){
-        g1.mainMenu();
-    }
+
 }
