@@ -8,6 +8,13 @@ import java.util.Scanner;
 
 public class dataManagement {
 
+    public static final int BY_MOST_SHOOTING_POINTS = 2;
+    public static final int BY_MOST_CLIMBING_POINTS = 3;
+    public static final int BY_MOST_AUTO_POINTS = 4;
+    public static final int BY_MOST_WINS = 5;
+    public static final int BY_MOST_LOSSES = 6;
+
+
     //makes a new folder
     public static int createFolder(String folderLocation, String folderName) {
         //creates new file
@@ -404,10 +411,11 @@ public class dataManagement {
 
         if (pos == -1) return str;
 
-        // Otherwise return the string, up to the dot.
+        // Otherwise, return the string, up to the dot.
 
         return str.substring(0, pos);
     }
+
     public static String[] updateFileList() {
         String userName = System.getProperty("user.name");
         String root = null;
@@ -418,6 +426,36 @@ public class dataManagement {
         }
         File F1 = new File(root);
         return F1.list();
+    }
+    public static String[] sortFiles(String rootIn, String[] arrayOfFiles, int sortType) {
+
+        String userName = System.getProperty("user.name");
+        String root = null;
+        try {
+            root = dataManagement.readFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/dataLocation.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+
+            //runs the amount of times as the length of the array
+            for(int i = 0; i < (arrayOfFiles.length - 1); i++) {
+                if(Integer.parseInt(getData(sortType,root,arrayOfFiles[i])) < Integer.parseInt(getData(sortType,root,arrayOfFiles[i + 1]))) {
+                    String v2 = arrayOfFiles[i + 1];
+                    arrayOfFiles[i + 1] = arrayOfFiles [i];
+                    arrayOfFiles[i] = v2;
+                }
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return arrayOfFiles;
+
     }
 }
 

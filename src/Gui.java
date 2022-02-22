@@ -19,8 +19,8 @@ private int winsOutput;
 private int lossesOutput;
 private String commentsOutput;
 private boolean isRunning;
-private int teamSelected;
-
+public int[] filterNums = {2,3,4,5,6};
+public static String[] filterNames = {"Filter By Shooting Points", "Filter By Climbing Points" , "Filter By Autonomous Points" , "Filter By Wins" , "Filter By Losses"};
     public Gui() {
         this.isRunning = true;
     }
@@ -432,7 +432,7 @@ private int teamSelected;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.updateFileList());
+        JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.sortFiles(root,dataManagement.updateFileList(),dataManagement.BY_MOST_WINS));
         ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
         JButton done = new JButton("Done");
         JButton cancel = new JButton("Cancel");
@@ -562,7 +562,7 @@ private int teamSelected;
                 }
 
 
-                JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.updateFileList());
+                JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.sortFiles(root,dataManagement.updateFileList(),dataManagement.BY_MOST_WINS));
                 ImageIcon image2 = new ImageIcon("Mechanical Monarchy.png");
                 JButton done = new JButton("Done");
                 JButton cancel = new JButton("Cancel");
@@ -622,7 +622,7 @@ private int teamSelected;
                 cancel.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent event) {
                         selectTeam.setVisible(false);
-                        frame1.setVisible(true);
+                        mainMenu();
 
 
                     }
@@ -630,7 +630,7 @@ private int teamSelected;
 
 
                 selectTeam.add(selectTeam1, BorderLayout.CENTER);
-                selectTeam.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                selectTeam.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 selectTeam.setPreferredSize(new Dimension(1280, 720));
                 selectTeam.setTitle("Select Team");
                 selectTeam.pack();
@@ -691,8 +691,8 @@ private int teamSelected;
                 }
 
                 File F1 = new File(root);
-                JComboBox<String> selectTeamBox1 = new JComboBox<>(dataManagement.updateFileList());
-                JComboBox<String> selectTeamBox2 = new JComboBox<>(dataManagement.updateFileList());
+                JComboBox<String> selectTeamBox1 = new JComboBox<>(dataManagement.sortFiles(root,dataManagement.updateFileList(),dataManagement.BY_MOST_WINS));
+                JComboBox<String> selectTeamBox2 = new JComboBox<>(dataManagement.sortFiles(root,dataManagement.updateFileList(),dataManagement.BY_MOST_WINS));
                 ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
                 JButton done = new JButton("Done");
                 JButton cancel = new JButton("Cancel");
@@ -758,7 +758,7 @@ private int teamSelected;
                 cancel.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent event) {
                         selectTeam.setVisible(false);
-                        frame1.setVisible(true);
+                        mainMenu();
 
 
                     }
@@ -819,7 +819,7 @@ private int teamSelected;
         cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 selectTeam.setVisible(false);
-                frame1.setVisible(true);
+                mainMenu();
 
 
             }
@@ -1232,21 +1232,31 @@ private int teamSelected;
             e.printStackTrace();
         }
 
-        JFileChooser fc = new JFileChooser(root);
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        String finalRoot = root;
+        SwingUtilities.invokeLater(new Runnable() {
 
+            @Override
+            public void run() {
+                JFileChooser fc = new JFileChooser(finalRoot);
+                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int returnVal = fc.showOpenDialog(null);
 
-        fc.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(fc.getSelectedFile() != null) {
-                    File selected = fc.getSelectedFile();
-                    dataManagement.writeToFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/","dataLocation.txt", selected.getAbsolutePath());
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = fc.getSelectedFile();
+                    dataManagement.writeToFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/","dataLocation.txt",file.getAbsolutePath());
+                } else {
                 }
                 mainMenu();
             }
         });
 
-        fc.showOpenDialog(null);
+
+
+
+
+
+
+
 
 
     }
@@ -1546,5 +1556,6 @@ private int teamSelected;
 
 
     }
+
 
 }
