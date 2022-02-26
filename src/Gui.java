@@ -18,11 +18,10 @@ private double shootingPointsOutput;
 private int winsOutput;
 private int lossesOutput;
 private String commentsOutput;
-private boolean isRunning;
-public int[] filterNums = {2,3,4,5,6};
-public static String[] filterNames = {"Filter By Shooting Points", "Filter By Climbing Points" , "Filter By Autonomous Points" , "Filter By Wins" , "Filter By Losses"};
+public int[] filterNums = {5,4,2,3,6};
+public String[] filterNames = {"Filter By Wins",  "Filter By Autonomous Points" ,  "Filter By Shooting Points" ,"Filter By Climbing Points" , "Filter By Losses"};
     public Gui() {
-        this.isRunning = true;
+
     }
 
     public String getTeamNameOutput() {
@@ -56,9 +55,7 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
     public String getCommentsOutput() {
         return commentsOutput;
     }
-    public boolean getIsRunning() {
-        return isRunning;
-    }
+
 
     public void newTeam() {
         ///////////////////////// Frames \\\\\\\\\\\\\\\\\\\\\\\\\
@@ -340,7 +337,6 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                     Gui.this.winsOutput = Integer.parseInt(winsOutput);
                     Gui.this.lossesOutput = Integer.parseInt(lossesOutput);
                     Gui.this.commentsOutput = commentsOutput;
-                    Gui.this.isRunning = false;
                     Main.submitted();
                     mainMenu();
                     frame3.setVisible(false);
@@ -422,6 +418,7 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
         JButton close = new JButton("Close");
         ImageIcon image = new ImageIcon("src/Mechanical Monarchy.png");
         JLabel logo = new JLabel(image);
+        //
 
 
         JLabel selectTeamTitle = new JLabel();
@@ -432,8 +429,13 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        JComboBox<String> selectFilterBox = new JComboBox<>(this.filterNames);
+
         JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.sortFiles(root,dataManagement.updateFileList(),dataManagement.BY_MOST_WINS));
         ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
+        JButton filter = new JButton("Filter");
         JButton done = new JButton("Done");
         JButton cancel = new JButton("Cancel");
         JLabel logo2 = new JLabel(image2);
@@ -445,8 +447,8 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
 
         //fonts and colors
         Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
-        Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
         Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+        Font textFont2 = new Font("OCR A Extended", Font.PLAIN, 18);
         Color orange = new Color(241, 89, 33);
 
         //adding stuff
@@ -462,8 +464,10 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
 
         selectTeam.add(selectTeam1);
         selectTeam.add(selectTeamBox);
+        selectTeam.add(selectFilterBox);
         selectTeam.add(selectTeamTitle);
         selectTeam.add(done);
+        selectTeam.add(filter);
         selectTeam.add(cancel);
         selectTeam.add(logo2);
 
@@ -493,6 +497,11 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
         selectTeamBox.setBackground(orange);
         selectTeamBox.setFont(textFont);
         selectTeamBox.setForeground(Color.darkGray);
+
+        selectFilterBox.setBounds(150, 150, 300, 50);
+        selectFilterBox.setBackground(orange);
+        selectFilterBox.setFont(textFont2);
+        selectFilterBox.setForeground(Color.darkGray);
 
 
         //buttons
@@ -525,7 +534,6 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
         localFiles.setFont(textFont);
         localFiles.setBackground(orange);
         localFiles.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
-        String finalRoot = root;
         localFiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 fileChooser();
@@ -563,13 +571,19 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
 
 
                 JComboBox<String> selectTeamBox = new JComboBox<>(dataManagement.sortFiles(root,dataManagement.updateFileList(),dataManagement.BY_MOST_WINS));
+
+                JComboBox<String> selectFilterBox = new JComboBox<>(Gui.this.filterNames);
+
                 ImageIcon image2 = new ImageIcon("Mechanical Monarchy.png");
                 JButton done = new JButton("Done");
                 JButton cancel = new JButton("Cancel");
+                JButton filter = new JButton("Filter");
                 JLabel logo2 = new JLabel(image2);
 
                 selectTeam.add(selectTeam1);
                 selectTeam.add(selectTeamBox);
+                selectTeam.add(selectFilterBox);
+                selectTeam.add(filter);
                 selectTeam.add(selectTeamTitle);
                 selectTeam.add(done);
                 selectTeam.add(cancel);
@@ -578,8 +592,8 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
 
                 //fonts and colors
                 Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
-                Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
                 Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+                Font textFont2 = new Font("OCR A Extended", Font.PLAIN, 18);
                 Color orange = new Color(241, 89, 33);
 
 
@@ -595,6 +609,11 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                 selectTeamBox.setBackground(orange);
                 selectTeamBox.setFont(textFont);
                 selectTeamBox.setForeground(Color.darkGray);
+
+                selectFilterBox.setBounds(150, 150, 300, 50);
+                selectFilterBox.setBackground(orange);
+                selectFilterBox.setFont(textFont2);
+                selectFilterBox.setForeground(Color.darkGray);
 
 
                 done.setBounds(150, 520, 300, 50);
@@ -623,6 +642,23 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                     public void actionPerformed(ActionEvent event) {
                         selectTeam.setVisible(false);
                         mainMenu();
+
+
+                    }
+                });
+
+                filter.setBounds(150, 210, 300, 50);
+                filter.setFont(textFont);
+                filter.setBackground(orange);
+                filter.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+                String finalRoot1 = root;
+                filter.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        String[] sortedList = dataManagement.sortFiles(finalRoot1,dataManagement.updateFileList(),filterNums[(selectFilterBox.getSelectedIndex())]);
+                        selectTeamBox.removeAllItems();
+                        for(int i = 0; i < dataManagement.updateFileList().length; i++) {
+                            selectTeamBox.addItem(sortedList[i]);
+                        }
 
 
                     }
@@ -690,18 +726,28 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                     e.printStackTrace();
                 }
 
-                File F1 = new File(root);
                 JComboBox<String> selectTeamBox1 = new JComboBox<>(dataManagement.sortFiles(root,dataManagement.updateFileList(),dataManagement.BY_MOST_WINS));
                 JComboBox<String> selectTeamBox2 = new JComboBox<>(dataManagement.sortFiles(root,dataManagement.updateFileList(),dataManagement.BY_MOST_WINS));
+
+                JComboBox<String> filterBox1 = new JComboBox<>(Gui.this.filterNames);
+                JComboBox<String> filterBox2 = new JComboBox<>(Gui.this.filterNames);
+
                 ImageIcon image2 = new ImageIcon("src/Mechanical Monarchy.png");
                 JButton done = new JButton("Done");
                 JButton cancel = new JButton("Cancel");
+
+                JButton filter1 = new JButton("Filter");
+                JButton filter2 = new JButton("Filter");
                 JLabel logo2 = new JLabel(image2);
 
                 selectTeam.add(selectTeam1);
                 selectTeam.add(selectTeamBox1);
                 selectTeam.add(selectTeamBox2);
                 selectTeam.add(selectTeamTitle);
+                selectTeam.add(filterBox1);
+                selectTeam.add(filterBox2);
+                selectTeam.add(filter1);
+                selectTeam.add(filter2);
                 selectTeam.add(done);
                 selectTeam.add(cancel);
                 selectTeam.add(logo2);
@@ -709,8 +755,8 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
 
                 //fonts and colors
                 Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
-                Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
                 Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
+                Font textFont2 = new Font("OCR A Extended", Font.PLAIN, 18);
                 Color orange = new Color(241, 89, 33);
 
 
@@ -727,10 +773,20 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                 selectTeamBox1.setFont(textFont);
                 selectTeamBox1.setForeground(Color.darkGray);
 
+                filterBox1.setBounds(50, 150, 300, 50);
+                filterBox1.setBackground(orange);
+                filterBox1.setFont(textFont2);
+                filterBox1.setForeground(Color.darkGray);
+
                 selectTeamBox2.setBounds(400, 300, 300, 50);
                 selectTeamBox2.setBackground(orange);
                 selectTeamBox2.setFont(textFont);
                 selectTeamBox2.setForeground(Color.darkGray);
+
+                filterBox2.setBounds(400, 150, 300, 50);
+                filterBox2.setBackground(orange);
+                filterBox2.setFont(textFont2);
+                filterBox2.setForeground(Color.darkGray);
 
 
                 done.setBounds(150, 520, 300, 50);
@@ -759,6 +815,39 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                     public void actionPerformed(ActionEvent event) {
                         selectTeam.setVisible(false);
                         mainMenu();
+
+
+                    }
+                });
+
+                filter1.setBounds(50, 210, 300, 50);
+                filter1.setFont(textFont);
+                filter1.setBackground(orange);
+                filter1.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+                String finalRoot1 = root;
+                filter1.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        String[] sortedList = dataManagement.sortFiles(finalRoot1,dataManagement.updateFileList(),filterNums[(filterBox1.getSelectedIndex())]);
+                        selectTeamBox1.removeAllItems();
+                        for(int i = 0; i < dataManagement.updateFileList().length; i++) {
+                            selectTeamBox1.addItem(sortedList[i]);
+                        }
+
+
+                    }
+                });
+
+                filter2.setBounds(400, 210, 300, 50);
+                filter2.setFont(textFont);
+                filter2.setBackground(orange);
+                filter2.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+                filter2.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        String[] sortedList = dataManagement.sortFiles(finalRoot1,dataManagement.updateFileList(),filterNums[(filterBox2.getSelectedIndex())]);
+                        selectTeamBox2.removeAllItems();
+                        for(int i = 0; i < dataManagement.updateFileList().length; i++) {
+                            selectTeamBox2.addItem(sortedList[i]);
+                        }
 
 
                     }
@@ -807,6 +896,22 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                     editTeam(selectTeamBox.getItemAt(selectTeamBox.getSelectedIndex()));
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+
+
+            }
+        });
+        filter.setBounds(150, 210, 300, 50);
+        filter.setFont(textFont);
+        filter.setBackground(orange);
+        filter.setBorder(BorderFactory.createTitledBorder((BorderFactory.createBevelBorder(0, Color.lightGray, Color.gray))));
+        String finalRoot1 = root;
+        filter.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                String[] sortedList = dataManagement.sortFiles(finalRoot1,dataManagement.updateFileList(),filterNums[(selectFilterBox.getSelectedIndex())]);
+                selectTeamBox.removeAllItems();
+                for(int i = 0; i < dataManagement.updateFileList().length; i++) {
+                    selectTeamBox.addItem(sortedList[i]);
                 }
 
 
@@ -1153,7 +1258,6 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                     Gui.this.winsOutput = Integer.parseInt(winsOutput);
                     Gui.this.lossesOutput = Integer.parseInt(lossesOutput);
                     Gui.this.commentsOutput = commentsOutput;
-                    Gui.this.isRunning = false;
                     Main.submitted();
                     String userName = System.getProperty("user.name");
                     String root = null;
@@ -1244,7 +1348,6 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fc.getSelectedFile();
                     dataManagement.writeToFile("C:/Users/" + userName + "/AppData/Local/Programs/trackerApp/","dataLocation.txt",file.getAbsolutePath());
-                } else {
                 }
                 mainMenu();
             }
@@ -1268,7 +1371,6 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
 
         //fonts and colors
         Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
-        Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
         Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
         Color orange = new Color(241, 89, 33);
 
@@ -1373,7 +1475,6 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
 
         //fonts and colors
         Font titleFont = new Font("OCR A Extended", Font.BOLD, 64);
-        Font headingFont = new Font("OCR A Extended", Font.PLAIN, 32);
         Font textFont = new Font("OCR A Extended", Font.PLAIN, 24);
         Color orange = new Color(241, 89, 33);
 
@@ -1556,6 +1657,9 @@ public static String[] filterNames = {"Filter By Shooting Points", "Filter By Cl
 
 
     }
+
+
+
 
 
 }

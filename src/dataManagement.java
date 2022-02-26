@@ -440,12 +440,33 @@ public class dataManagement {
         try {
 
 
-            //runs the amount of times as the length of the array
-            for(int i = 0; i < (arrayOfFiles.length - 1); i++) {
-                if(Integer.parseInt(getData(sortType,root,arrayOfFiles[i])) < Integer.parseInt(getData(sortType,root,arrayOfFiles[i + 1]))) {
-                    String v2 = arrayOfFiles[i + 1];
-                    arrayOfFiles[i + 1] = arrayOfFiles [i];
-                    arrayOfFiles[i] = v2;
+            if(sortType != dataManagement.BY_MOST_LOSSES) {
+                int trues = 0;
+                for (int masterI = 0; trues < arrayOfFiles.length && trues < 1000; masterI++) {
+                    for (int i = 0; i < (arrayOfFiles.length - 1); i++) {
+                        if (Double.parseDouble(getData(sortType, root, arrayOfFiles[i])) < Double.parseDouble(getData(sortType, root, arrayOfFiles[i + 1]))) {
+                            String v2 = arrayOfFiles[i + 1];
+                            arrayOfFiles[i + 1] = arrayOfFiles[i];
+                            arrayOfFiles[i] = v2;
+                            trues = 0;
+                        } else {
+                            trues++;
+                        }
+                    }
+                }
+            } else {
+                int trues = 0;
+                for (int masterI = 0; trues < arrayOfFiles.length && trues < 1000; masterI++) {
+                    for (int i = 0; i < (arrayOfFiles.length - 1); i++) {
+                        if (Double.parseDouble(getData(sortType, root, arrayOfFiles[i])) > Double.parseDouble(getData(sortType, root, arrayOfFiles[i + 1]))) {
+                            String v2 = arrayOfFiles[i + 1];
+                            arrayOfFiles[i + 1] = arrayOfFiles[i];
+                            arrayOfFiles[i] = v2;
+                            trues = 0;
+                        } else {
+                            trues++;
+                        }
+                    }
                 }
             }
 
