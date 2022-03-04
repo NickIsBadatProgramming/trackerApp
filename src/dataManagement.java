@@ -21,7 +21,7 @@ public class dataManagement {
 
         if(folderLocation != null && folderName != null) {
 
-            if(!checkForSlash(folderLocation)) //checks for a slash after folderLocation input.
+            if(!checkForSlash(folderLocation)) //checks for a slash after folderLocation inputs.
                 {
                    folderLocation += "/";
             }
