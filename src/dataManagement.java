@@ -442,7 +442,10 @@ public class dataManagement {
 
             if(sortType != dataManagement.BY_MOST_LOSSES) {
                 int trues = 0;
-                for (int masterI = 0; trues < arrayOfFiles.length && trues < 1000; masterI++) {
+                if(arrayOfFiles == null) {
+                    return null;
+                }
+                for (int masterI = 0; trues < arrayOfFiles.length && trues < 1000 ; masterI++) {
                     for (int i = 0; i < (arrayOfFiles.length - 1); i++) {
                         if (Double.parseDouble(getData(sortType, root, arrayOfFiles[i])) < Double.parseDouble(getData(sortType, root, arrayOfFiles[i + 1]))) {
                             String v2 = arrayOfFiles[i + 1];
