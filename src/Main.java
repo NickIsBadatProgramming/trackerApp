@@ -20,9 +20,15 @@ public class Main {
         // uses dataManagement class with startup method to create new folder if one is necessary
         int startup = (dataManagement.createFolder(root));
         switch (startup) {
-            case -1 -> System.out.println("Error");
-            case 1 -> System.out.println("Data folder created");
-            case 2 -> System.out.println("Data folder located");
+            case -1:
+                System.out.println("Error");
+                break;
+            case 1 :
+                System.out.println("Data folder created");
+                break;
+            case 2 :
+                System.out.println("Data folder located");
+                break;
         }
 
         g1.mainMenu();
