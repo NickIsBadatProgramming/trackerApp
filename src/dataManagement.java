@@ -15,34 +15,29 @@ public class dataManagement {
     public static final int BY_MOST_LOSSES = 6;
 
 
-    //makes a new folder
+    //makes a new folder - returns conditions: 1 if folder was created, 2 if it already exists, and -1 if error.
     public static int createFolder(String folderLocation, String folderName) {
         //creates new file
 
         if(folderLocation != null && folderName != null) {
-            if(checkForSlash(folderLocation)) {
+
+            if(!checkForSlash(folderLocation)) //checks for a slash after folderLocation input.
+                {
+                   folderLocation += "/";
+            }
+            if(startsWithSlash(folderName)) {
+                folderName = folderName.substring(0,folderName.length()-2 );
+            }
                 File f1 = new File(folderLocation + folderName);
                 boolean testForFolder = f1.mkdirs();
                 if (testForFolder) {
                     return 1;
-                    //tests if folder exists already
                 } else if (f1.exists()) {
                     return 2;
                 } else {
                     return -1;
                 }
-            } else {
-                File f1 = new File(folderLocation + "/" + folderName);
-                boolean testForFolder = f1.mkdirs();
-                if (testForFolder) {
-                    return 1;
-                    //tests if folder exists already
-                } else if (f1.exists()) {
-                    return 2;
-                } else {
-                    return -1;
-                }
-            }
+
         }
 
 
@@ -55,19 +50,11 @@ public class dataManagement {
         //creates new file
 
         if(folderLocation != null) {
-            if(checkForSlash(folderLocation)) {
-                File f1 = new File(folderLocation);
-                boolean testForFolder = f1.mkdirs();
-                if (testForFolder) {
-                    return 1;
-                    //tests if folder exists already
-                } else if (f1.exists()) {
-                    return 2;
-                } else {
-                    return -1;
-                }
-            } else {
+            if(!checkForSlash(folderLocation)) {
                 folderLocation += "/";
+            }
+
+
                 File f1 = new File(folderLocation);
                 boolean testForFolder = f1.mkdirs();
                 if (testForFolder) {
@@ -78,7 +65,6 @@ public class dataManagement {
                 } else {
                     return -1;
                 }
-            }
         }
 
 
@@ -117,9 +103,13 @@ public class dataManagement {
         String lastChar = input.substring(input.length() - 1);
         return lastChar.equals("/") || lastChar.equals("\\");
     }
+    public static boolean startsWithSlash(String input) {
+        String lastChar = input.substring(0,1);
+        return lastChar.equals("/") || lastChar.equals("\\");
+    }
 
 
-    //overwrites the input file
+    //overwrites the input file - returns true if written to, false if not.
     public static boolean writeToFile(String filePath, String fileName, String data) {
         if (!checkForSlash(filePath)) {
             filePath += "/";
